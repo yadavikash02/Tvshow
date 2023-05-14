@@ -44,7 +44,18 @@ function App() {
    <BrowserRouter>
     <Header title="TVmaze" mode={mode} toggle={changeMode}/>
     <Routes>
-      <Route path='/'element={<div className="container">
+      <Route path='/Tvshow'element={<div className="container">
+    <div className="container row">
+          {
+            data.map((element) => {
+                 return <div className="col-md-4 my-5 mx-0.5 container" key={element.show.id ? element.show.id : "1"}>
+                    <SetElement imageUrl={element.show.image?.original} name={element.show.name} showID={element.show.id} clickhandler={clickhandler} mode={mode}/>
+              </div>
+            })
+          }
+    </div>
+    </div>}/>
+    <Route path='/'element={<div className="container">
     <div className="container row">
           {
             data.map((element) => {

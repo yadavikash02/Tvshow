@@ -6,7 +6,7 @@ function Header({ title,mode ,toggle}) {
     <div>
       <nav className={`navbar navbar-expand-lg bg-${mode==="dark"?"secondary":"light"} navbar-${mode}`}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/Tvshow">
             {title}
           </Link>
           <button
@@ -26,7 +26,7 @@ function Header({ title,mode ,toggle}) {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  to="/home"
+                  to="/"
                 >
                   Home
                 </Link>

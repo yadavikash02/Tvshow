@@ -7,7 +7,7 @@ function Summary({ imageUrl, name, summary,genres,mode }) {
                 <div className="col-md-4">
                     <img src={imageUrl} className="img-fluid rounded-start" alt="..." />
                     <p className={`card-text mx-1 bg-${mode} text-${mode==="dark"?"light":"dark"}`}>
-                            <small className={` bg-${mode} text-${mode==="dark"?"light":"dark"}`}>
+                            <small className={`bg-${mode} text-${mode==="dark"?"light":"dark"}`}>
                                 {
                                     genres
                                 }</small>
