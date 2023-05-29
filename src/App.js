@@ -4,6 +4,7 @@ import { BrowserRouter,Route,Routes } from 'react-router-dom';
 import React,{useState,useEffect} from 'react'
 import SetElement from './component/SetElement';
 import Summary from './component/Summary';
+import ImageAutoPlay from './component/ImageAutoPlay';
 function App() {
   const[mode,setMode]=useState('light');
   const[viku,setViku]=useState(0);
@@ -21,7 +22,7 @@ function App() {
   }
   const [data,setData]=useState([]);
   const getDataFromApi=()=>{
-      fetch("https://api.tvmaze.com/search/shows?q=all")
+      fetch("https://api.tvmaze.com/schedule/web?date=2020-05-29&country=US")
       .then((response)=>response.json())
       .then((json)=>{
           // console.log(json)
@@ -32,35 +33,31 @@ function App() {
       getDataFromApi();
   },[])
   const clickhandler=(showID)=>{
-    console.log(showID)
-    // showID=showID.toString();
     setViku(showID);
-    console.log("shantanu")
-    console.log(viku)
-    console.log(viku)
-    console.log(viku)
   }
   return (
    <BrowserRouter>
     <Header title="TVmaze" mode={mode} toggle={changeMode}/>
+    <ImageAutoPlay data={data}></ImageAutoPlay> 
     <Routes>
+      {/* <Route path="/Tvshow" element={<ImageAutoPlay data={data}></ImageAutoPlay>}></Route> */}
       <Route path='/Tvshow'element={<div className="container">
-    <div className="container row">
+    <div className="row">
           {
             data.map((element) => {
-                 return <div className="col-md-4 my-5 mx-0.5 container" key={element.show.id ? element.show.id : "1"}>
-                    <SetElement imageUrl={element.show.image?.original} name={element.show.name} showID={element.show.id} clickhandler={clickhandler} mode={mode}/>
+                 return <div className="col-md-4 my-5 mx-0.5 " key={element?._embedded?.show?.id ? element?._embedded?.show?.id : "1"}>
+                    <SetElement imageUrl={element?._embedded?.show?.image?.original} name={element?._embedded?.show?.name} showID={element?._embedded?.show?.id} clickhandler={clickhandler} mode={mode}/>
               </div>
             })
           }
     </div>
     </div>}/>
-    <Route path='/'element={<div className="container">
+    <Route path='/'element={<div >
     <div className="container row">
           {
             data.map((element) => {
-                 return <div className="col-md-4 my-5 mx-0.5 container" key={element.show.id ? element.show.id : "1"}>
-                    <SetElement imageUrl={element.show.image?.original} name={element.show.name} showID={element.show.id} clickhandler={clickhandler} mode={mode}/>
+                 return <div className="col-md-4 my-5 mx-0.5" key={element?._embedded?.show?.id ? element?._embedded?.show?.id : "1"}>
+                    <SetElement imageUrl={element?._embedded?.show?.image?.original} name={element?._embedded?.show?.name} showID={element?._embedded?.show?.id} clickhandler={clickhandler} mode={mode}/>
               </div>
             })
           }
@@ -70,11 +67,11 @@ function App() {
     <div className="container row">
     {
   data.map((element) => {
-    if (viku === element.show.id) {
+    if (viku === (element?._embedded?.show?.id?element?._embedded?.show?.id:"")) {
       // console.log("run")
       return (
-        <div className="col-md-4 my-5 mx-0.5 container" key={element.show.id ? element.show.id : "1"}>
-          <Summary imageUrl={element.show.image?.original} name={element.show.name} summary={element.show.summary} genres={element.show.genres} mode={mode}/>
+        <div className="col-md-4 my-5 mx-0.5 container" key={element?._embedded?.show?.id ? element?._embedded?.show?.id : "1"}>
+          <Summary imageUrl={element?._embedded?.show?.image?.original?element?._embedded?.show?.image?.original:""} name={element?._embedded?.show?.name?element?._embedded?.show?.name:""} summary={element?._embedded?.show?.summary?element?._embedded?.show?.summary:""} genres={element?._embedded?.show?.genres?element?._embedded?.show?.genres:""} mode={mode}/>
         </div>
       );
     }
