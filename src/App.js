@@ -22,7 +22,7 @@ function App() {
   }
   const [data,setData]=useState([]);
   const getDataFromApi=()=>{
-      fetch("https://api.tvmaze.com/schedule/web?date=2020-05-29&country=US")
+      fetch("https://api.tvmaze.com/search/shows?q=all")
       .then((response)=>response.json())
       .then((json)=>{
           // console.log(json)

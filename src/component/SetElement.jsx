@@ -11,5 +11,4 @@ function SetElement({ imageUrl, name, showID, clickhandler,mode }) {
         </div>
     )
 }
-
 export default SetElement
